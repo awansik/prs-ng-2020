@@ -1,0 +1,90 @@
+<app-menu></app-menu>
+<div>
+  <span class="component-title">{{ title }}</span>
+  <span
+    ><span> | <a routerLink="/request/list">Return to list</a></span>
+  </span>
+  <main class="single">
+    <table *ngIf="request" class="table table-sm">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Status</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ request.description }}</td>
+          <td>{{ request.status }}</td>
+          <td>${{ request.total }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+</div>
+<p></p>
+<div>
+  <span class="component-title">[{{ title1 }}]</span>
+  |
+  <span *ngIf="request && request.status == 'New'">
+    |
+    <a routerLink="/line-item/create/{{ requestId }}"
+      ><img
+        width="20"
+        height="20"
+        src="assets/add-icon.png"
+        title="Add New"
+      /> </a
+  ></span>
+  <main class="single">
+    <table class="table table-sm table-striped">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Line Total</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="lineItems">
+        <tr *ngFor="let lineItem of lineItems">
+          <td>{{ lineItem.product.name }}</td>
+          <td>{{ lineItem.quantity }}</td>
+          <td>${{ lineItem.product.price }}</td>
+          <td>${{ lineItem.product.price * lineItem.quantity }}</td>
+          <td>
+            <a routerLink="/line-item/edit/{{ lineItem.id }}">
+              <img
+                src="assets/pencil-icon.png"
+                width="20"
+                height="20"
+                title="Edit"
+            /></a>
+
+            |
+            <a routerLink="/line-item/delete/{{ lineItem.id }}"
+              ><img
+                src="assets/delete-icon.png"
+                width="20"
+                height="20"
+                title="Delete"
+            /></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+  <span *ngIf="lineItems.length == 0">
+    <span>
+      Select the <img src="assets/add-icon.png" width="15" height="15" /> above
+      to add items
+    </span>
+  </span>
+  <p *ngIf="request && request.status == 'New'">
+    <button (click)="submit()" class="btn btn-sm btn-primary">
+      Submit Request
+    </button>
+  </p>
+</div>

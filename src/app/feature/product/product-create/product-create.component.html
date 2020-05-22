@@ -1,0 +1,67 @@
+<app-menu></app-menu>
+<div *ngIf="product" class="component">
+  <section class="heading">
+    <span class="page-title front weight-bold font-italic">{{ title }}</span>
+    <span> | <a routerLink="/product/list">Return to List</a></span>
+  </section>
+  <main class="single">
+    <table class="table table-sm">
+      <tr>
+        <td>Vendor:</td>
+        <td>
+          <select
+            [(ngModel)]="product.vendor"
+            class="rounded"
+            type="text"
+            [compareWith]="compVendor"
+          >
+            <option value="none" disabled selected="selected">
+              Select an Option
+            </option>
+            <option *ngFor="let vendor of vendors" [ngValue]="vendor">{{
+              vendor.name
+            }}</option></select
+          >
+        </td>
+      </tr>
+      <tr>
+        <td>Part Number:</td>
+        <td>
+          <input [(ngModel)]="product.partNumber" class="rounded" type="text" />
+        </td>
+      </tr>
+      <tr>
+        <td>Product Name:</td>
+        <td>
+          <input [(ngModel)]="product.name" class="rounded" type="text" />
+        </td>
+      </tr>
+      <tr>
+        <td>Price:</td>
+        <td>
+          <input
+            [(ngModel)]="product.price"
+            class="rounded"
+            min="0"
+            type="number"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>Unit:</td>
+        <td>
+          <input [(ngModel)]="product.unit" class="rounded" type="text" />
+        </td>
+      </tr>
+      <tr>
+        <td>Photo Path:</td>
+        <td>
+          <input [(ngModel)]="product.photoPath" class="rounded" type="text" />
+        </td>
+      </tr>
+    </table>
+  </main>
+  <span>
+    <span> <a (click)="save()" class="btn btn-sm btn-warning">Save</a></span>
+  </span>
+</div>

@@ -1,0 +1,101 @@
+<app-menu></app-menu>
+<div class="component" *ngIf="request">
+  <section class="heading">
+    <span class="page-title font-weight-bold font-italic">{{ title }}</span>
+    <span> | <a routerLink="/request/list">Return to list</a></span>
+  </section>
+  <main class="single">
+    <tr *ngIf="loggedUser && loggedUser.admin == true">
+      <td>User:</td>
+      <td>
+        <select
+          [(ngModel)]="request.user"
+          class="rounded"
+          [compareWith]="compUser"
+          required
+        >
+          <option *ngFor="let user of users" [ngValue]="user"
+            >{{ user.firstName }} {{ user.lastName }}</option
+          >
+        </select>
+        <!-- <span *ngIf="!request.user"
+          ><img src="assets/empty.png" width="25"
+        /></span>
+        <span *ngIf="request.user"
+          ><img src="assets/full.png" width="25"
+        /></span> -->
+      </td>
+    </tr>
+    <tr>
+      <td>Description:</td>
+      <td>
+        <input
+          [(ngModel)]="request.description"
+          class="rounded"
+          type="text"
+          required
+        />
+        <!-- <span *ngIf="!request.description"
+          ><img src="assets/empty.png" width="25"
+        /></span>
+        <span *ngIf="request.description"
+          ><img src="assets/full.png" width="25"
+        /></span> -->
+      </td>
+    </tr>
+    <tr>
+      <td>Justification:</td>
+      <td>
+        <input
+          [(ngModel)]="request.justification"
+          class="rounded"
+          type="text"
+          required
+        />
+        <!-- <span *ngIf="!request.justification"
+          ><img src="assets/empty.png" width="25"
+        /></span>
+        <span *ngIf="request.justification"
+          ><img src="assets/full.png" width="25"
+        /></span> -->
+      </td>
+    </tr>
+    <tr>
+      <td>Date Needed:</td>
+      <td>
+        <input
+          [(ngModel)]="request.dateNeeded"
+          class="rounded"
+          type="date"
+          required
+        />
+        <!-- <span *ngIf="!request.dateNeeded"
+          ><img src="assets/empty.png" width="25"
+        /></span>
+        <span *ngIf="request.dateNeeded"
+          ><img src="assets/full.png" width="25"
+        /></span> -->
+      </td>
+    </tr>
+    <tr>
+      <td>Delivery Method:</td>
+      <select [(ngModel)]="request.deliveryMode" class="rounded" required>
+        <option value="Delivery">Delivery</option>
+        <option value="In Store Pick-up">In Store Pick-up</option>
+      </select>
+    </tr>
+  </main>
+  <span
+    *ngIf="
+      request.description &&
+      request.justification &&
+      request.dateNeeded &&
+      request.deliveryMode &&
+      request.user
+    "
+  >
+    <button (click)="save()" class="btn btn-sm btn-primary">
+      Edit Request
+    </button>
+  </span>
+</div>

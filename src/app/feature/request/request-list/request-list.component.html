@@ -1,0 +1,87 @@
+<app-menu></app-menu>
+<section class="heading">
+  <span class="page-title front weight-bold font-italic">[{{ title }}]</span>
+  <a routerLink="/request/create"
+    ><img
+      width="20"
+      height="20"
+      src="assets/add-icon.png"
+      title="Add New Request"
+  /></a>
+</section>
+<table *ngIf="requests" class="table table-sm table-striped">
+  <thead>
+    <tr>
+      <th>Submitted Date</th>
+      <th>User</th>
+      <th>Delivery Method</th>
+      <th>Date Needed</th>
+      <th>Status</th>
+      <th>Total</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="requests">
+    <tr *ngFor="let request of requests">
+      <td>{{ request.submittedDate }}</td>
+      <td>{{ request.user.firstName }}{{ request.user.lastName }}</td>
+      <td>{{ request.description }}</td>
+      <td>{{ request.dateNeeded }}</td>
+      <td>{{ request.status }}</td>
+      <td>${{ request.total }}</td>
+      <td>
+        <a routerLink="/request/detail/{{ request.id }}">
+          <img
+            width="20"
+            height="20"
+            src="assets/details.png"
+            title="Request Details"
+        /></a>
+        <a routerLink="/request/edit/{{ request.id }}">
+          <img
+            width="20"
+            height="20"
+            src="assets/pencil-icon.png"
+            title="Edit Request"
+        /></a>
+        <a routerLink="/request/lines/{{ request.id }}">
+          <img
+            width="20"
+            height="20"
+            src="assets/lines.png"
+            title="Request Lines"
+        /></a>
+      </td>
+    </tr>
+  </tbody>
+  <tbody *ngIf="myRequests && user && user.admin == false">
+    <tr *ngFor="let myRequest of myRequests">
+      <td *ngIf="myRequest.status != 'New'">{{ myRequest.submittedDate }}</td>
+      <td *ngIf="myRequest.status == 'New'"></td>
+      <td>{{ myRequest.user.firstName }} {{ myRequest.user.lastName }}</td>
+      <td>{{ myRequest.deliveryMode }}</td>
+      <td>{{ myRequest.dateNeeded }}</td>
+      <td>${{ myRequest.total }}</td>
+      <td>{{ myRequest.status }}</td>
+      <td>
+        <a routerLink="/request/detail/{{ myRequest.id }}"
+          ><img src="assets/details-icon.png" width="20" height="20" title="Detail"
+        /></a>
+        <b> | </b>
+        <span *ngIf="myRequest.status == 'New'">
+          <a routerLink="/request/edit/{{ myRequest.id }}"
+            ><img
+              src="assets/pencil-icon.png"
+              width="20"
+              height="20"
+              title="Edit"
+          /></a>
+          <b> | </b>
+        </span>
+        <a routerLink="line-item/list/{{ myRequest.id }}"
+          ><img src="assets/lines-icon.png" width="20" height="20"
+        /></a>
+      </td>
+    </tr>
+  </tbody>
+</table>

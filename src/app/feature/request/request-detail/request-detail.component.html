@@ -1,0 +1,83 @@
+<app-menu></app-menu>
+<div *ngIf="request" class="component">
+  <section class="heading">
+    <span class="page-title front weight-bold font-italic">{{ title }}</span>
+    <span> | <a routerLink="/request/list">Return to List</a></span>
+  </section>
+  <p *ngIf="!request">Loading</p>
+  <section *ngIf="request">
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Phone</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ request.user.firstName }} {{ request.user.lastName }}</td>
+          <td>{{ request.user.phoneNumber }}</td>
+          <td>{{ request.user.email }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <main class="single">
+    <table class="table table-sm">
+      <tr>
+        <td>Request ID:</td>
+        <td>{{ request.id }}</td>
+      </tr>
+      <tr>
+        <td>Date Submitted:</td>
+        <td>
+          {{ request.submittedDate }}
+        </td>
+      </tr>
+      <tr>
+        <td>Description:</td>
+        <td>{{ request.description }}</td>
+      </tr>
+      <tr>
+        <td>Justification:</td>
+        <td>{{ request.justification }}</td>
+      </tr>
+      <tr>
+        <td>Date Needed:</td>
+        <td>{{ request.dateNeeded }}</td>
+      </tr>
+      <tr>
+        <td>Delivery Method:</td>
+        <td>{{ request.deliveryMode }}</td>
+      </tr>
+      <tr>
+        <td>Total:</td>
+        <td>${{ request.total }}</td>
+      </tr>
+      <tr>
+        <td>Status:</td>
+        <td>{{ request.status }}</td>
+      </tr>
+      <tr>
+        <td>Rejection Reason:</td>
+        <td>{{ request.reasonForRejection }}</td>
+      </tr>
+    </table>
+  </main>
+  <span *ngIf="request">
+    <span>
+      <a
+        routerLink="/request/edit/{{ request.id }}"
+        class="btn btn-sm btn-warning"
+        >Edit</a
+      >
+      |
+    </span>
+    <span
+      ><button (click)="delete()" class="btn btn-sm btn-danger">
+        Delete
+      </button></span
+    >
+  </span>
+</div>

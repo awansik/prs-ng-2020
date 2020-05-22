@@ -1,0 +1,9 @@
+<nav>
+    <ul>
+      <li class="text-danger">PRS</li>
+      <li *ngFor="let mi of menuItems" title="{{ mi.tooltip }}">
+        <a routerLink="{{ mi.href }}">{{ mi.display }}</a>
+      </li>
+      <li *ngIf="user">{{ user.firstName }} {{ user.lastName }}</li>
+    </ul>
+  </nav>

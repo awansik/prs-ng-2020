@@ -1,0 +1,125 @@
+<app-menu></app-menu>
+<div *ngIf="vendor" class="component">
+  <section class="Heading">
+    <span class="page-title front weight-bold font-italic">{{ title }}</span>
+    <span> | <a routerLink="/vendor/list">Return to List</a></span>
+  </section>
+  <main class="single">
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <td><b>Information for Vendor:</b> {{ vendor.name }}</td>
+        </tr>
+      </thead>
+      <tr>
+        <td>ID:</td>
+        <td>{{ vendor.id }}</td>
+      </tr>
+      <tr>
+        <td>Vendor Code:</td>
+        <td>
+          <input
+            [(ngModel)]="vendor.code"
+            class="rounded"
+            type="text"
+            READONLY
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>Vendor Name:</td>
+        <td>
+          <input
+            [(ngModel)]="vendor.name"
+            class="rounded"
+            type="text"
+            READONLY
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>Phone Number:</td>
+        <td>
+          <input
+            [(ngModel)]="vendor.phoneNumber"
+            class="rounded"
+            type="text"
+            READONLY
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>Email:</td>
+        <td>
+          <input
+            [(ngModel)]="vendor.email"
+            class="rounded"
+            type="text"
+            READONLY
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>Address:</td>
+        <td>
+          <input
+            [(ngModel)]="vendor.address"
+            class="rounded"
+            type="text"
+            READONLY
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>City:</td>
+        <td>
+          <input
+            [(ngModel)]="vendor.city"
+            class="rounded"
+            type="text"
+            READONLY
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>State:</td>
+        <td>
+          <input
+            [(ngModel)]="vendor.state"
+            class="rounded"
+            type="text"
+            READONLY
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>Zip Code:</td>
+        <td>
+          <input
+            [(ngModel)]="vendor.zip"
+            class="rounded"
+            type="text"
+            READONLY
+          />
+        </td>
+      </tr>
+    </table>
+  </main>
+  <span>
+    <span *ngIf="loggedInUser && loggedInUser.admin == true">
+      <span
+        ><a
+          routerLink="/vendor/edit/{{ vendor.id }}"
+          class="btn btn-sm btn-warning"
+          >Edit</a
+        ></span
+      >
+      <span>
+        <b> | </b>
+        <button (click)="delete()" class="btn btn-sm btn-danger">
+          Delete
+        </button></span
+      >
+    </span>
+  </span>
+</div>

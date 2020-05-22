@@ -1,0 +1,41 @@
+<app-menu></app-menu>
+<section class="heading">
+  <span class="page-title front weight-bold font-italic">[{{ title }}]</span>
+  <span *ngIf="loggedUser && loggedUser.admin == true">
+    |
+    <a routerLink="/product/create"
+      ><img width="20" height="20" src="assets/add-icon.png" title="Add New" />
+    </a>
+  </span>
+</section>
+<table *ngIf="products" class="table table-sm table-striped">
+  <thead>
+    <tr>
+      <th>Product Name</th>
+      <th>Vendor</th>
+      <th>Price</th>
+      <th>Unit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <td>{{ product.name }}</td>
+      <td>{{ product.vendor.name }}</td>
+      <td>${{ product.price }}</td>
+      <td>{{ product.unit }}</td>
+      <td *ngIf="loggedUser && loggedUser.admin == true">
+        <a routerLink="/product/detail/{{ product.id }}"
+          ><img src="assets/details-icon.png" width="20" height="20" title="Detail"
+        /></a>
+        |
+        <a routerLink="/product/edit/{{ product.id }}"
+          ><img
+            src="assets/pencil-icon.png"
+            width="20"
+            height="20"
+            title="Edit"
+        /></a>
+      </td>
+    </tr>
+  </tbody>
+</table>

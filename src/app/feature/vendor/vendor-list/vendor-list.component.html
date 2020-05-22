@@ -1,0 +1,53 @@
+<app-menu></app-menu>
+<section class="heading">
+  <span class="page-title front weight-bold font-italic">[{{ title }}]</span>
+  <a routerLink="/vendor/create"
+    ><img
+      width="20"
+      height="20"
+      src="assets/add-icon.png"
+      title="Add New Vendor"
+  /></a>
+</section>
+<table *ngIf="vendors" class="table table-sm table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone Number</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zip Code</th>
+      <th>Email</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let vendor of vendors">
+      <td>{{ vendor.name }}</td>
+      <td>{{ vendor.phoneNumber }}</td>
+      <td>{{ vendor.address }}</td>
+      <td>{{ vendor.city }}</td>
+      <td>{{ vendor.state }}</td>
+      <td>{{ vendor.zip }}</td>
+      <td>{{ vendor.email }}</td>
+      <td>
+        <a routerLink="/vendor/detail/{{ vendor.id }}">
+          <img
+            width="20"
+            height="20"
+            src="assets/details-icon.png"
+            title="Vendor Details"
+        /></a>
+        <b> | </b>
+        <a routerLink="/vendor/edit/{{ vendor.id }}">
+          <img
+            width="20"
+            height="20"
+            src="assets/pencil-icon.png"
+            title="Edit Vendor"
+        /></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
