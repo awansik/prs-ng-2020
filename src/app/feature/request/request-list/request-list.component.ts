@@ -18,19 +18,24 @@ export class RequestListComponent implements OnInit {
   constructor(
     private requestSvc: RequestService,
     private sysSvc: SystemService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.sysSvc.checkLogin();
     this.user = this.sysSvc.loggedInUser;
 
     this.requestSvc.list().subscribe((jr) => {
-      this.requests = jr.data as Request[];
-      console.log('List of requests', this.requests);
-      for (let request of this.requests) {
-        if (this.user.id == request.user.id) {
-          this.myRequests.push(request);
+      if (jr.errors == null) {
+        this.requests = jr.data as Request[];
+        console.log('List of requests', this.requests);
+        for (let request of this.requests) {
+          if (this.user.id == request.user.id) {
+            this.myRequests.push(request);
+          }
         }
+      }
+      else {
+        console.log("*** Error getting request list", jr.errors);
       }
     });
   }
